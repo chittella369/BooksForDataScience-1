@@ -17,3 +17,55 @@ https://machinelearningmedium.com/2017/09/06/multiclass-logistic-regression/
 
 
 https://medium.com/@prabhukuppaala007/logistic-regression-for-binary-classification-in-python-1ec7d161f83e
+
+https://www.kaggle.com/dilip990/spam-ham-detection-using-naive-bayes-classifier/notebook
+
+import numpy as np
+import pandas as pd
+#from sklearn.model_selection import train_test_split
+from sklearn.cross_validation import train_test_split
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.svm import LinearSVC
+from sklearn.model_selection import cross_val_score
+import seaborn as sns; sns.set()
+from sklearn.naive_bayes import MultinomialNB, GaussianNB, BernoulliNB
+from sklearn.metrics import accuracy_score,confusion_matrix,f1_score
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+message = [line.rstrip() for line in open('spam.csv')]
+print(len(message))
+
+for message_no,message in enumerate(message[:10]):
+    print(message_no,message)
+    print('\n')
+    
+#df1 = pd.read_csv("spam.csv",encoding='latin-1', header=None)
+data=pd.read_csv('spam.csv',encoding='latin-1')
+data.drop(["Unnamed: 2", "Unnamed: 3", "Unnamed: 4"], axis = 1, inplace = True)  # dropped columns which are not required.
+data = data.rename(columns = {"v1":"classlabels","v2":"message"})
+data.head()
+
+data.describe()
+data.groupby('classlabels').describe()
+
+
+
+#Create a new column to detect how long the text messages are:
+data['length']=data['message'].apply(len)
+data.head()
+
+data['length'].plot(bins=50,kind='hist')
+
+data.length.describe()
+
+# To find maximum length of the message, which is 910 characters.
+data[data['length']==910]['message'].iloc[0]
+
+import string
+mess = 'sample message!...'
+nopunc=[char for char in mess if char not in string.punctuation]
+nopunc=''.join(nopunc)
+print(nopunc)
+
+
