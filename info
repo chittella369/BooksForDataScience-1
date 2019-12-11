@@ -20,6 +20,10 @@ https://medium.com/@prabhukuppaala007/logistic-regression-for-binary-classificat
 
 https://www.kaggle.com/dilip990/spam-ham-detection-using-naive-bayes-classifier/notebook
 
+C:\Users\srika\AppData\Roaming\nltk_data  -- copy stopwords.zip file
+
+
+
 import numpy as np
 import pandas as pd
 #from sklearn.model_selection import train_test_split
